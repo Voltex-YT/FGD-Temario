@@ -4,8 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Programación de Contenido - FGD</title>
+    <title>FGD Primavera 2026 - Contenido del Curso</title>
     <style>
+        :root {
+            --bg-color: #0f172a;
+            --sidebar-bg: #1e293b;
+            --accent-color: #38bdf8;
+            --accent-hover: #0284c7;
+            --text-color: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -14,52 +24,86 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            display: flex;
+            background-color: var(--bg-color);
+            color: var(--text-color);
             height: 100vh;
-            overflow: hidden;
-            background-color: #f4f6f9;
-        }
-
-        iframe {
-            background-color: #0f172a;
-        }
-
-        /* BANNER IZQUIERDO: MENÚ ESTRUCTURADO */
-        .sidebar {
-            width: 320px;
-            background-color: #1e293b;
-            color: #f8fafc;
+            height: 100dvh;
             display: flex;
             flex-direction: column;
-            border-right: 2px solid #0f172a;
-            overflow-y: auto;
+            overflow: hidden;
         }
 
-        .sidebar-header {
-            padding: 20px;
-            background-color: #0f172a;
-            border-bottom: 1px solid #334155;
+        /* BARRA SUPERIOR PARA MÓVIL */
+        .mobile-header {
+            display: none;
+            background-color: var(--sidebar-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: 12px 16px;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
         }
 
-        .sidebar-header h2 {
-            font-size: 1.1rem;
-            color: #38bdf8;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+        .mobile-header h2 {
+            font-size: 1.05rem;
+            color: var(--accent-color);
         }
 
-        /* ACORDEÓN / DESGLOSE */
-        .unit-btn {
-            width: 100%;
-            background-color: #1e293b;
-            color: #e2e8f0;
+        .menu-toggle-btn {
+            background: var(--accent-color);
+            color: #0f172a;
             border: none;
-            border-bottom: 1px solid #334155;
-            padding: 14px 18px;
-            text-align: left;
+            padding: 8px 14px;
+            border-radius: 6px;
             font-weight: bold;
             font-size: 0.9rem;
             cursor: pointer;
+        }
+
+        /* LAYOUT PRINCIPAL (ESCRITORIO) */
+        .app-container {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* MENÚ LATERAL (SIDEBAR) */
+        .sidebar {
+            width: 320px;
+            min-width: 320px;
+            background-color: var(--sidebar-bg);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            padding: 20px 15px;
+            overflow-y: auto;
+            transition: transform 0.3s ease-in-out;
+            z-index: 90;
+        }
+
+        .sidebar h2 {
+            font-size: 1.15rem;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        /* BOTONES DE UNIDADES Y SUBMENÚS */
+        .unit-btn {
+            width: 100%;
+            background-color: #0f172a;
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            padding: 12px 14px;
+            border-radius: 8px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            margin-top: 10px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -67,36 +111,43 @@
         }
 
         .unit-btn:hover {
-            background-color: #334155;
+            border-color: var(--accent-color);
         }
 
         .submenu {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out;
-            background-color: #0f172a;
+            display: none;
+            flex-direction: column;
+            padding-left: 8px;
+            margin-top: 5px;
+            gap: 4px;
+        }
+
+        .submenu.active {
+            display: flex;
         }
 
         .submenu a {
-            display: block;
-            padding: 10px 18px 10px 30px;
-            color: #94a3b8;
+            color: var(--text-muted);
             text-decoration: none;
             font-size: 0.85rem;
-            border-bottom: 1px solid #1e293b;
-            transition: color 0.2s, background 0.2s;
+            padding: 8px 10px;
+            border-radius: 6px;
+            line-height: 1.4;
+            transition: all 0.2s;
         }
 
-        .submenu a:hover {
-            color: #38bdf8;
-            background-color: #1e293b;
+        .submenu a:hover,
+        .submenu a.active-link {
+            background-color: rgba(56, 189, 248, 0.15);
+            color: var(--accent-color);
+            font-weight: 600;
         }
 
-        /* PANEL DERECHO: CONTENEDOR VISOR */
+        /* ÁREA DE CONTENIDO (VISOR IFRAME) */
         .content-area {
             flex: 1;
             height: 100%;
-            background-color: #ffffff;
+            background-color: var(--bg-color);
         }
 
         .content-area iframe {
@@ -104,75 +155,168 @@
             height: 100%;
             border: none;
         }
+
+        /* CAPA DE OSCURECIMIENTO PARA MÓVIL (BACKDROP) */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 80;
+        }
+
+        /* ========================================================= */
+        /* REGLAS RESPONSIVAS PARA CELULARES Y TABLETS               */
+        /* ========================================================= */
+        @media (max-width: 768px) {
+            .mobile-header {
+                display: flex;
+                /* Muestra el encabezado superior en móvil */
+            }
+
+            .sidebar {
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 85%;
+                max-width: 320px;
+                transform: translateX(-100%);
+                /* Oculta la barra lateral fuera de pantalla */
+                box-shadow: 5px 0 15px rgba(0, 0, 0, 0.5);
+            }
+
+            /* Clase que activa el menú en móvil */
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .overlay.active {
+                display: block;
+            }
+        }
     </style>
 </head>
 
 <body>
 
-    <!-- MENÚ LATERAL TIPO EXCEL -->
-    <div class="sidebar">
-        <div class="sidebar-header">
-            <h2>Contenido del Curso</h2>
-        </div>
-
-        <!-- UNIDAD 1 -->
-        <button class="unit-btn" onclick="toggleMenu('u1')">
-            UNIDAD 1: Interdisciplinariedad
-            <span>▼</span>
-        </button>
-        <div id="u1" class="submenu">
-            <a href="U1/T1/index.html" target="visor">1.1 La Ciencia y sus métodos</a>
-            <a href="U1/T2/index.html" target="visor">1.2 Las áreas del conocimiento</a>
-            <a href="U1/T3/index.html" target="visor">1.3 Metodologías interdisciplinarias</a>
-        </div>
-
-        <!-- UNIDAD 2 -->
-        <button class="unit-btn" onclick="toggleMenu('u2')">
-            UNIDAD 2: Introducción a la Disciplina
-            <span>▼</span>
-        </button>
-        <div id="u2" class="submenu">
-            <a href="U2/T1/index.html" target="visor">2.1 Transformaciones en el conocimiento</a>
-            <a href="U2/T2/index.html" target="visor">2.2 Estructura general de las disciplinas</a>
-            <a href="U2/T3/index.html" target="visor">2.3 Retos y oportunidades del ejercicio profesional</a>
-            <a href="U2/T4/index.html" target="visor">2.4 Divulgación del conocimiento disciplinar</a>
-        </div>
-        <button class="unit-btn" onclick="toggleMenu('u3')">
-            UNIDAD 3: Problemas actuales de la Disciplina
-            <span>▼</span>
-        </button>
-        <div id="u3" class="submenu">
-            <a href="U3/T1/index.html" target="visor">3.1 Retos locales, Nacionales y Globales.</a>
-            <a href="U3/T2/index.html" target="visor">3.2 Innovaciones y Tendencia emergentes</a>
-            <a href="U3/T3/index.html" target="visor">3.3 Ética profesional frente a los desafíos contemporáneos</a>
-            <a href="U3/T4/index.html" target="visor">3.4 Consideraciones éticas para una mirada comprehensiva de la
-                naturaleza</a>
-        </div>
-        <button class="unit-btn" onclick="toggleMenu('u4')">
-            UNIDAD 4: Aplicaciones practicas de conocimiento disciplinar
-            <span>▼</span>
-        </button>
-        <div id="u4" class="submenu">
-            <a href="U4/T1/index.html" target="visor">4.1 Las prácticas profesionales como primera vinculación con el
-                sector disciplinar</a>
-            <a href="U4/T2/index.html" target="visor">4.2 El trabajo interdisciplinario y de retribución social</a>
-            <a href="U4/T3/index.html" target="visor">4.3 Casos de éxito, innovación y buenas prácticas</a>
-        </div>
+    <!-- BARRA SUPERIOR PARA MÓVILES -->
+    <div class="mobile-header">
+        <h2>FGD Primavera 2026</h2>
+        <button class="menu-toggle-btn" onclick="toggleSidebar()">☰ Temas</button>
     </div>
 
-    <!-- CONTENEDOR DERECHO DONDE SE REPRODUCE EL OTRO HTML -->
-    <div class="content-area">
-        <iframe name="visor" title="Visor de Contenido"></iframe>
+    <!-- CONTENEDOR PRINCIPAL -->
+    <div class="app-container">
+
+        <!-- SOMBRA DE FONDO AL ABRIR MENÚ EN MÓVIL -->
+        <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
+        <!-- MENÚ LATERAL -->
+        <nav class="sidebar" id="sidebar">
+            <h2>📚 Plan de Estudios</h2>
+
+            <!-- UNIDAD 1 -->
+            <button class="unit-btn" onclick="toggleMenu('u1')">
+                UNIDAD 1: Conocimiento
+                <span>▼</span>
+            </button>
+            <div id="u1" class="submenu">
+                <a href="unidades/tema1_1.html" target="visor" onclick="onTopicSelect(this)">1.1 Tipos de
+                    investigación</a>
+                <a href="unidades/tema1_2.html" target="visor" onclick="onTopicSelect(this)">1.2 Construcción y
+                    validez</a>
+                <a href="unidades/tema1_3.html" target="visor" onclick="onTopicSelect(this)">1.3 Comunicación de
+                    saberes</a>
+            </div>
+
+            <!-- UNIDAD 2 -->
+            <button class="unit-btn" onclick="toggleMenu('u2')">
+                UNIDAD 2: Devenir e Impacto
+                <span>▼</span>
+            </button>
+            <div id="u2" class="submenu">
+                <a href="unidades/tema2_1.html" target="visor" onclick="onTopicSelect(this)">2.1 Surgimiento e
+                    historia</a>
+                <a href="unidades/tema2_2.html" target="visor" onclick="onTopicSelect(this)">2.2 Formación
+                    disciplinar</a>
+                <a href="unidades/tema2_3.html" target="visor" onclick="onTopicSelect(this)">2.3 Incidencia del
+                    campo</a>
+            </div>
+
+            <!-- UNIDAD 3 -->
+            <button class="unit-btn" onclick="toggleMenu('u3')">
+                UNIDAD 3: Problemas Actuales
+                <span>▼</span>
+            </button>
+            <div id="u3" class="submenu">
+                <a href="unidades/tema3_1.html" target="visor" onclick="onTopicSelect(this)">3.1 Retos
+                    locales/globales</a>
+                <a href="unidades/tema3_2.html" target="visor" onclick="onTopicSelect(this)">3.2 Tendencias
+                    emergentes</a>
+                <a href="unidades/tema3_3.html" target="visor" onclick="onTopicSelect(this)">3.3 Ética profesional</a>
+                <a href="unidades/tema3_4.html" target="visor" onclick="onTopicSelect(this)">3.4 Mirada de la
+                    naturaleza</a>
+            </div>
+
+            <!-- UNIDAD 4 -->
+            <button class="unit-btn" onclick="toggleMenu('u4')">
+                UNIDAD 4: Aplicaciones Prácticas
+                <span>▼</span>
+            </button>
+            <div id="u4" class="submenu">
+                <a href="unidades/tema4_1.html" target="visor" onclick="onTopicSelect(this)">4.1 Prácticas
+                    profesionales</a>
+                <a href="unidades/tema4_2.html" target="visor" onclick="onTopicSelect(this)">4.2 Retribución social</a>
+                <a href="unidades/tema4_3.html" target="visor" onclick="onTopicSelect(this)">4.3 Casos de éxito y buenas
+                    prácticas</a>
+            </div>
+        </nav>
+
+        <!-- ÁREA DEL VISOR -->
+        <main class="content-area">
+            <iframe name="visor" id="visor" src="unidades/tema1_1.html"></iframe>
+        </main>
     </div>
 
     <script>
-        // Función para desplegar/contraer subtemas
-        function toggleMenu(id) {
-            const menu = document.getElementById(id);
-            if (menu.style.maxHeight && menu.style.maxHeight !== "0px") {
-                menu.style.maxHeight = "0px";
-            } else {
-                menu.style.maxHeight = menu.scrollHeight + "px";
+        // Desplegar o colapsar el submenú de una unidad
+        function toggleMenu(menuId) {
+            const submenu = document.getElementById(menuId);
+            const isVisible = submenu.classList.contains('active');
+
+            // Opcional: cerrar otros desplegables
+            document.querySelectorAll('.submenu').forEach(el => el.classList.remove('active'));
+
+            if (!isVisible) {
+                submenu.classList.add('active');
+            }
+        }
+
+        // Abrir y cerrar la barra lateral en móviles
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+        }
+
+        function closeSidebar() {
+            document.getElementById('sidebar').classList.remove('open');
+            document.getElementById('overlay').classList.remove('active');
+        }
+
+        // Al hacer clic en una lección en el celular, cargar y cerrar el menú automáticamente
+        function onTopicSelect(linkElement) {
+            document.querySelectorAll('.submenu a').forEach(a => a.classList.remove('active-link'));
+            linkElement.classList.add('active-link');
+
+            // Cierra el menú en móvil para dejar ver el iframe completo
+            if (window.innerWidth <= 768) {
+                closeSidebar();
             }
         }
     </script>
