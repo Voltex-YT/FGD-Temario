@@ -1,0 +1,335 @@
+:root {
+    --bg-color: #0f172a;
+    --card-bg: #1e293b;
+    --accent-color: #38bdf8;
+    --accent-hover: #0284c7;
+    --text-color: #f8fafc;
+    --text-muted: #94a3b8;
+    --border-color: #334155;
+    --warning-color: #f59e0b;
+    --success-color: #10b981;
+    --purple-accent: #c084fc;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    min-height: 100vh;
+    min-height: 100dvh;
+    /* Altura dinámica para navegadores móviles */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
+    padding: 15px;
+}
+
+/* CONTENEDOR PRINCIPAL CENTRADO */
+.presentation-container {
+    width: 100%;
+    max-width: 980px;
+    height: calc(100vh - 85px);
+    height: calc(100dvh - 85px);
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+
+/* DIAPOSITIVAS */
+.slide {
+    display: none;
+    padding: 30px;
+    height: 100%;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    /* Scroll suave en iOS */
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+.slide.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ENCABEZADOS */
+.slide-header {
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 10px;
+    margin-bottom: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.slide-header h1 {
+    font-size: 1.3rem;
+    color: var(--accent-color);
+    line-height: 1.3;
+}
+
+.slide-header .tag {
+    font-size: 0.75rem;
+    background: #0369a1;
+    padding: 4px 10px;
+    border-radius: 12px;
+    color: #e0f2fe;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+p {
+    line-height: 1.55;
+    color: #cbd5e1;
+    margin-bottom: 14px;
+    font-size: 0.92rem;
+}
+
+/* GRIDS Y TARJETAS */
+.grid-2,
+.grid-3,
+.grid-4 {
+    display: grid;
+    gap: 14px;
+    margin: 14px 0;
+}
+
+.grid-2 {
+    grid-template-columns: 1fr 1fr;
+}
+
+.grid-3 {
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.grid-4 {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.card {
+    background-color: #0f172a;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 14px;
+}
+
+.card h3 {
+    color: var(--accent-color);
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+}
+
+.card ul {
+    padding-left: 18px;
+    color: #cbd5e1;
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+.card ul li {
+    margin-bottom: 5px;
+}
+
+/* DIAGRAMAS EN CSS */
+.diagram-flow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 16px 0;
+    background: #0f172a;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px dashed var(--border-color);
+    gap: 6px;
+}
+
+.step-box {
+    background: #1e293b;
+    border: 1px solid var(--accent-color);
+    padding: 8px;
+    border-radius: 6px;
+    text-align: center;
+    font-size: 0.8rem;
+    font-weight: bold;
+    flex: 1;
+}
+
+.arrow {
+    color: var(--accent-color);
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+/* CAJAS DESTACADAS */
+.box-ethics {
+    background-color: #451a03;
+    border-left: 4px solid var(--warning-color);
+    padding: 12px;
+    border-radius: 4px;
+    margin: 14px 0;
+}
+
+.box-ethics h4 {
+    color: #fcd34d;
+    margin-bottom: 4px;
+    font-size: 0.9rem;
+}
+
+.box-ethics p {
+    color: #fef3c7;
+    font-size: 0.85rem;
+    margin-bottom: 0;
+}
+
+.box-example {
+    background-color: #064e3b;
+    border-left: 4px solid var(--success-color);
+    padding: 12px;
+    border-radius: 4px;
+    margin: 14px 0;
+}
+
+.box-example h4 {
+    color: #a7f3d0;
+    margin-bottom: 4px;
+    font-size: 0.9rem;
+}
+
+.box-example p {
+    color: #d1fae5;
+    font-size: 0.85rem;
+    margin-bottom: 0;
+}
+
+/* NAVEGACIÓN INFERIOR */
+.controls {
+    width: 100%;
+    max-width: 980px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    gap: 10px;
+}
+
+.btn {
+    background-color: var(--accent-color);
+    color: #0f172a;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.88rem;
+    transition: background 0.2s;
+    touch-action: manipulation;
+    /* Evita zoom al dar doble toque */
+}
+
+.btn:hover {
+    background-color: var(--accent-hover);
+    color: white;
+}
+
+.btn:disabled {
+    background-color: var(--border-color);
+    cursor: not-allowed;
+    color: var(--text-muted);
+}
+
+.slide-counter {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 8px;
+    }
+
+    .presentation-container {
+        height: calc(100dvh - 65px);
+        border-radius: 8px;
+    }
+
+    .slide {
+        padding: 18px 16px;
+        /* Menos margen interno para aprovechar pantalla */
+    }
+
+    .slide-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+
+    .slide-header h1 {
+        font-size: 1.15rem;
+    }
+
+    /* Convertir todos los Grids a 1 sola columna */
+    .grid-2,
+    .grid-3,
+    .grid-4 {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    /* Orientación vertical para diagramas */
+    .diagram-flow {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .step-box {
+        width: 100%;
+    }
+
+    /* Cambiar la flecha horizontal a vertical */
+    .arrow::after {
+        content: "⬇";
+    }
+
+    .arrow {
+        font-size: 0.9rem;
+    }
+
+    .controls {
+        margin-top: 8px;
+    }
+
+    .btn {
+        padding: 8px 14px;
+        font-size: 0.8rem;
+    }
+
+    .slide-counter {
+        font-size: 0.78rem;
+    }
+}
