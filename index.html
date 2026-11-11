@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FGD Primavera 2026 - Contenido del Curso</title>
+    <title>FGD Primavera 2026 - Programación de Contenido</title>
     <style>
         :root {
             --bg-color: #0f172a;
@@ -33,7 +33,7 @@
             overflow: hidden;
         }
 
-        /* BARRA SUPERIOR PARA MÓVIL */
+        /* BARRA SUPERIOR MÓVIL */
         .mobile-header {
             display: none;
             background-color: var(--sidebar-bg);
@@ -60,7 +60,7 @@
             cursor: pointer;
         }
 
-        /* LAYOUT PRINCIPAL (ESCRITORIO) */
+        /* LAYOUT PRINCIPAL */
         .app-container {
             display: flex;
             width: 100%;
@@ -69,10 +69,10 @@
             position: relative;
         }
 
-        /* MENÚ LATERAL (SIDEBAR) */
+        /* MENÚ LATERAL */
         .sidebar {
-            width: 320px;
-            min-width: 320px;
+            width: 340px;
+            min-width: 340px;
             background-color: var(--sidebar-bg);
             border-right: 1px solid var(--border-color);
             display: flex;
@@ -84,14 +84,13 @@
         }
 
         .sidebar h2 {
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             color: var(--accent-color);
             margin-bottom: 15px;
             padding-bottom: 8px;
             border-bottom: 2px solid var(--accent-color);
         }
 
-        /* BOTONES DE UNIDADES Y SUBMENÚS */
         .unit-btn {
             width: 100%;
             background-color: #0f172a;
@@ -101,13 +100,14 @@
             border-radius: 8px;
             text-align: left;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             cursor: pointer;
             margin-top: 10px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: background 0.2s;
+            line-height: 1.3;
+            transition: border-color 0.2s;
         }
 
         .unit-btn:hover {
@@ -117,7 +117,7 @@
         .submenu {
             display: none;
             flex-direction: column;
-            padding-left: 8px;
+            padding-left: 6px;
             margin-top: 5px;
             gap: 4px;
         }
@@ -129,10 +129,10 @@
         .submenu a {
             color: var(--text-muted);
             text-decoration: none;
-            font-size: 0.85rem;
+            font-size: 0.83rem;
             padding: 8px 10px;
             border-radius: 6px;
-            line-height: 1.4;
+            line-height: 1.35;
             transition: all 0.2s;
         }
 
@@ -143,7 +143,7 @@
             font-weight: 600;
         }
 
-        /* ÁREA DE CONTENIDO (VISOR IFRAME) */
+        /* ÁREA DEL VISOR */
         .content-area {
             flex: 1;
             height: 100%;
@@ -156,7 +156,6 @@
             border: none;
         }
 
-        /* CAPA DE OSCURECIMIENTO PARA MÓVIL (BACKDROP) */
         .overlay {
             display: none;
             position: fixed;
@@ -168,13 +167,10 @@
             z-index: 80;
         }
 
-        /* ========================================================= */
-        /* REGLAS RESPONSIVAS PARA CELULARES Y TABLETS               */
-        /* ========================================================= */
+        /* ADAPTACIÓN MÓVIL */
         @media (max-width: 768px) {
             .mobile-header {
                 display: flex;
-                /* Muestra el encabezado superior en móvil */
             }
 
             .sidebar {
@@ -183,13 +179,11 @@
                 left: 0;
                 height: 100%;
                 width: 85%;
-                max-width: 320px;
+                max-width: 340px;
                 transform: translateX(-100%);
-                /* Oculta la barra lateral fuera de pantalla */
                 box-shadow: 5px 0 15px rgba(0, 0, 0, 0.5);
             }
 
-            /* Clase que activa el menú en móvil */
             .sidebar.open {
                 transform: translateX(0);
             }
@@ -203,92 +197,91 @@
 
 <body>
 
-    <!-- BARRA SUPERIOR PARA MÓVILES -->
+    <!-- BARRA SUPERIOR MÓVIL -->
     <div class="mobile-header">
         <h2>FGD Primavera 2026</h2>
         <button class="menu-toggle-btn" onclick="toggleSidebar()">☰ Temas</button>
     </div>
 
-    <!-- CONTENEDOR PRINCIPAL -->
     <div class="app-container">
 
-        <!-- SOMBRA DE FONDO AL ABRIR MENÚ EN MÓVIL -->
         <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
 
         <!-- MENÚ LATERAL -->
         <nav class="sidebar" id="sidebar">
-            <h2>📚 Plan de Estudios</h2>
+            <h2>📚 Programación de Contenido</h2>
 
             <!-- UNIDAD 1 -->
             <button class="unit-btn" onclick="toggleMenu('u1')">
-                UNIDAD 1: Conocimiento
+                UNIDAD 1: Interdisciplinariedad y Conocimientos
                 <span>▼</span>
             </button>
             <div id="u1" class="submenu">
-                <a href="unidades/tema1_1.html" target="visor" onclick="onTopicSelect(this)">1.1 Tipos de
-                    investigación</a>
-                <a href="unidades/tema1_2.html" target="visor" onclick="onTopicSelect(this)">1.2 Construcción y
-                    validez</a>
-                <a href="unidades/tema1_3.html" target="visor" onclick="onTopicSelect(this)">1.3 Comunicación de
-                    saberes</a>
+                <a href="U1/T1/index.html" target="visor" onclick="onTopicSelect(this)">1.1 La Ciencia y sus métodos</a>
+                <a href="U1/T2/index.html" target="visor" onclick="onTopicSelect(this)">1.2 Las áreas del conocimiento y
+                    sus relaciones</a>
+                <a href="U1/T3/index.html" target="visor" onclick="onTopicSelect(this)">1.3 Metodologías para la
+                    práctica interdisciplinaria</a>
             </div>
 
             <!-- UNIDAD 2 -->
             <button class="unit-btn" onclick="toggleMenu('u2')">
-                UNIDAD 2: Devenir e Impacto
+                UNIDAD 2: Introducción a la Disciplina
                 <span>▼</span>
             </button>
             <div id="u2" class="submenu">
-                <a href="unidades/tema2_1.html" target="visor" onclick="onTopicSelect(this)">2.1 Surgimiento e
-                    historia</a>
-                <a href="unidades/tema2_2.html" target="visor" onclick="onTopicSelect(this)">2.2 Formación
+                <a href="U2/T1/index.html" target="visor" onclick="onTopicSelect(this)">2.1 Transformaciones en el
+                    conocimiento disciplinar</a>
+                <a href="U2/T2/index.html" target="visor" onclick="onTopicSelect(this)">2.2 Estructura general de las
+                    disciplinas</a>
+                <a href="U2/T3/index.html" target="visor" onclick="onTopicSelect(this)">2.3 Retos y oportunidades del
+                    ejercicio profesional</a>
+                <a href="U2/T4/index.html" target="visor" onclick="onTopicSelect(this)">2.4 Divulgación del conocimiento
                     disciplinar</a>
-                <a href="unidades/tema2_3.html" target="visor" onclick="onTopicSelect(this)">2.3 Incidencia del
-                    campo</a>
             </div>
 
             <!-- UNIDAD 3 -->
             <button class="unit-btn" onclick="toggleMenu('u3')">
-                UNIDAD 3: Problemas Actuales
+                UNIDAD 3: Problemas Actuales de la Disciplina
                 <span>▼</span>
             </button>
             <div id="u3" class="submenu">
-                <a href="unidades/tema3_1.html" target="visor" onclick="onTopicSelect(this)">3.1 Retos
-                    locales/globales</a>
-                <a href="unidades/tema3_2.html" target="visor" onclick="onTopicSelect(this)">3.2 Tendencias
+                <a href="U3/T1/index.html" target="visor" onclick="onTopicSelect(this)">3.1 Retos locales, Nacionales y
+                    Globales</a>
+                <a href="U3/T2/index.html" target="visor" onclick="onTopicSelect(this)">3.2 Innovaciones y Tendencias
                     emergentes</a>
-                <a href="unidades/tema3_3.html" target="visor" onclick="onTopicSelect(this)">3.3 Ética profesional</a>
-                <a href="unidades/tema3_4.html" target="visor" onclick="onTopicSelect(this)">3.4 Mirada de la
+                <a href="U3/T3/index.html" target="visor" onclick="onTopicSelect(this)">3.3 Ética profesional frente a
+                    los desafíos</a>
+                <a href="U3/T4/index.html" target="visor" onclick="onTopicSelect(this)">3.4 Consideraciones éticas de la
                     naturaleza</a>
             </div>
 
             <!-- UNIDAD 4 -->
             <button class="unit-btn" onclick="toggleMenu('u4')">
-                UNIDAD 4: Aplicaciones Prácticas
+                UNIDAD 4: Aplicaciones Prácticas del Conocimiento
                 <span>▼</span>
             </button>
             <div id="u4" class="submenu">
-                <a href="unidades/tema4_1.html" target="visor" onclick="onTopicSelect(this)">4.1 Prácticas
-                    profesionales</a>
-                <a href="unidades/tema4_2.html" target="visor" onclick="onTopicSelect(this)">4.2 Retribución social</a>
-                <a href="unidades/tema4_3.html" target="visor" onclick="onTopicSelect(this)">4.3 Casos de éxito y buenas
-                    prácticas</a>
+                <a href="U4/T1/index.html" target="visor" onclick="onTopicSelect(this)">4.1 Prácticas profesionales como
+                    primera vinculación</a>
+                <a href="U4/T2/index.html" target="visor" onclick="onTopicSelect(this)">4.2 Trabajo interdisciplinario y
+                    retribución social</a>
+                <a href="U4/T3/index.html" target="visor" onclick="onTopicSelect(this)">4.3 Casos de éxito, innovación y
+                    buenas prácticas</a>
             </div>
         </nav>
 
-        <!-- ÁREA DEL VISOR -->
+        <!-- VISOR DE CONTENIDO -->
         <main class="content-area">
-            <iframe name="visor" id="visor" src="unidades/tema1_1.html"></iframe>
+            <iframe name="visor" id="visor" src="U1/T1/index.html"></iframe>
         </main>
     </div>
 
     <script>
-        // Desplegar o colapsar el submenú de una unidad
         function toggleMenu(menuId) {
             const submenu = document.getElementById(menuId);
             const isVisible = submenu.classList.contains('active');
 
-            // Opcional: cerrar otros desplegables
             document.querySelectorAll('.submenu').forEach(el => el.classList.remove('active'));
 
             if (!isVisible) {
@@ -296,7 +289,6 @@
             }
         }
 
-        // Abrir y cerrar la barra lateral en móviles
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
             const overlay = document.getElementById('overlay');
@@ -309,12 +301,10 @@
             document.getElementById('overlay').classList.remove('active');
         }
 
-        // Al hacer clic en una lección en el celular, cargar y cerrar el menú automáticamente
         function onTopicSelect(linkElement) {
             document.querySelectorAll('.submenu a').forEach(a => a.classList.remove('active-link'));
             linkElement.classList.add('active-link');
 
-            // Cierra el menú en móvil para dejar ver el iframe completo
             if (window.innerWidth <= 768) {
                 closeSidebar();
             }
